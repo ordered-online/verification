@@ -27,13 +27,5 @@ class Token(models.Model):
             self.key = binascii.hexlify(os.urandom(20)).decode()
         return super().save(*args, **kwargs)
 
-    @property
-    def json_serializable(self):
-        return {
-            "key": self.key,
-            "user": self.user.id,
-            "timestamp": self.timestamp
-        }
-
     def __str__(self):
         return self.key
