@@ -16,7 +16,7 @@ def login_with_credentials(request):
     username = data.get("username")
     password = data.get("password")
     user = authenticate(username=username, password=password)
-    if not user:
+    if user is None:
         return JsonResponse({"success": False})
     return JsonResponse(model_to_dict(user.token))
 
@@ -28,7 +28,7 @@ def verify_with_auth_token(request):
     data = json.loads(request.body)
     token = data.get("token")
     user = authenticate(token=token)
-    if not user:
+    if user is None:
         return JsonResponse({"success": False})
     return JsonResponse(model_to_dict(user.token))
 
@@ -55,7 +55,7 @@ def register(request):
         first_name=first_name,
         last_name=last_name
     )
-    if not user:
+    if user is None:
         return JsonResponse({"success": False})
     Token.objects.create(user=user)
     return JsonResponse(model_to_dict(user.token))
