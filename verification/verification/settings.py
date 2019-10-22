@@ -120,9 +120,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
-# Add our custom authentication backends
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'verification.backends.AuthenticationHeaderTokenBackend'
-]
