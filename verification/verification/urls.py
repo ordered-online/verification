@@ -22,6 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path("verification/register/", views.register, name="register"),
-    path("verification/verify/", views.verify_with_auth_token, name="verify_with_auth_token"),
-    path("verification/login/", views.login_with_credentials, name="login_with_credentials"),
+    path("verification/verify/session-key/", views.verify_with_session_key, name="verify_with_session_key"),
+    path("verification/verify/credentials/", views.verify_with_credentials, name="verify_with_credentials"),
 ]

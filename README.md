@@ -36,39 +36,44 @@ Example with `curl`:
 $ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser", "password": "testtest", "email": "test@example.com", "first_name": "Test", "last_name": "User"}' http://127.0.0.1:8000/verification/register/
 
 {
-    "key": "1e5226b08111ec0f09f36f7d30105f61bd34cdfd",
-    "user": 2,
-    "timestamp": "2019-10-21T11:39:53.578Z"
+    "session_key": "5qaff6u2ab0t0q0j0374xjhtya6uhwnx",
+    "session_data": {
+        "user_id": 1
+    }
 }
 ```
 
-### `/verification/verify/`
-Verify an user with an authentication token. Returns the associated user.
+### `/verification/verify/session-key/`
+Verify an user with a session key. Returns the associated user and a new session key.
 Method: POST
 
 Example with `curl`:
 ```
-$ curl -i -X POST -H 'Content-Type: application/json' -d '{"token": "1e5226b08111ec0f09f36f7d30105f61bd34cdfd"}' http://127.0.0.1:8000/verification/verify/
+$ curl -i -X POST -H 'Content-Type: application/json' -d '{"session_key": "5qaff6u2ab0t0q0j0374xjhtya6uhwnx"}' http://127.0.0.1:8000/verification/verify/session-key/
 
 {
-    "key": "1e5226b08111ec0f09f36f7d30105f61bd34cdfd",
-    "user": 2,
-    "timestamp": "2019-10-21T11:39:53.578Z"
+    "session_key": "5qaff6u2ab0t0q0j0374xjhtya6uhwnx",
+    "session_data": {
+        "user_id": 1
+    }
 }
 ```
 
-### `/verification/login/`
+### `/verification/verify/credentials/`
 Verify an user with login credentials. Returns an authentication token.
+Note, that every time credentials are requested, all existing sessions from the user get invalidated.
 Method: POST
+
 
 Example with `curl`:
 ```
-$ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser", "password": "testtest"}' http://127.0.0.1:8000/verification/login/
+$ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser", "password": "testtest"}' http://127.0.0.1:8000/verification/verify/credentials/
 
 {
-    "key": "1e5226b08111ec0f09f36f7d30105f61bd34cdfd",
-    "user": 2,
-    "timestamp": "2019-10-21T11:39:53.578Z"
+    "token": "3afexnw4gqoze0p3wt0nyd6nmmnzu4ek",
+    "session": {
+        "user_id": 1
+    }
 }
 ```
 
