@@ -54,9 +54,9 @@ $ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser
 ```
 
 Failure responses:
-- [IncorrectAccessMethod](# IncorrectAccessMethod) if the service was accessed with any other method than specified.
-- [IncorrectCredentials](# IncorrectCredentials) if the supplied credentials are insufficient for account creation.
-- [DuplicateUser](# DuplicateUser) if the user already exists.
+- [IncorrectAccessMethod](#IncorrectAccessMethod) if the service was accessed with any other method than specified.
+- [IncorrectCredentials](#IncorrectCredentials) if the supplied credentials are insufficient for account creation.
+- [DuplicateUser](#DuplicateUser) if the user already exists.
 
 ### Session key verification via`/verification/verify/`
 Verify a user with a session key. Returns the associated user and a new session key.
@@ -79,9 +79,9 @@ $ curl -i -X POST -H 'Content-Type: application/json' -d '{"session_key": "lyp1u
 ```
 
 Failure responses:
-- [IncorrectAccessMethod](# IncorrectAccessMethod) if the service was accessed with any other method than specified.
-- [IncorrectSessionKey](# IncorrectSessionKey) if the session key is incorrect or the accessed session no longer exists.
-- [IncorrectUserId](# IncorrectUserId) if the given user id is incorrect.
+- [IncorrectAccessMethod](#IncorrectAccessMethod) if the service was accessed with any other method than specified.
+- [IncorrectSessionKey](#IncorrectSessionKey) if the session key is incorrect or the accessed session no longer exists.
+- [IncorrectUserId](#IncorrectUserId) if the given user id is incorrect.
 
 ### Login via `/verification/login/`
 Verify an user with login credentials. Returns an authentication token.
@@ -109,8 +109,8 @@ $ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser
 ```
 
 Failure Responses:
-- [IncorrectAccessMethod](# IncorrectAccessMethod) if the service was accessed with any other method than specified.
-- [IncorrectCredentials](# IncorrectCredentials) if the credentials are incorrect.
+- [IncorrectAccessMethod](#IncorrectAccessMethod) if the service was accessed with any other method than specified.
+- [IncorrectCredentials](#IncorrectCredentials) if the credentials are incorrect.
 
 ### Logout via `/verification/logout/`
 Invalidate the session under the given session key and logout.
@@ -133,9 +133,9 @@ $ curl -i -X POST -H 'Content-Type: application/json' -d '{"session_key": "lyp1u
 ```
 
 Failure responses:
-- [IncorrectAccessMethod](# IncorrectAccessMethod) if the service was accessed with any other method than specified.
-- [IncorrectSessionKey](# IncorrectSessionKey) if the session key is incorrect or the accessed session no longer exists.
-- [IncorrectUserId](# IncorrectUserId) if the given user id is incorrect.
+- [IncorrectAccessMethod](#IncorrectAccessMethod) if the service was accessed with any other method than specified.
+- [IncorrectSessionKey](#IncorrectSessionKey) if the session key is incorrect or the accessed session no longer exists.
+- [IncorrectUserId](#IncorrectUserId) if the given user id is incorrect.
 
 
 ## Failure Responses
