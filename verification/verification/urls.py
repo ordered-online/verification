@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path("verification/register/", views.register, name="register"),
-    path("verification/verify/session-key/", views.verify_with_session_key, name="verify_with_session_key"),
-    path("verification/verify/credentials/", views.verify_with_credentials, name="verify_with_credentials"),
+    path("verification/verify/", views.verify, name="verify"),
+    path("verification/login/", views.login, name="login"),
+    path("verification/logout/", views.logout, name="logout"),
 ]
