@@ -14,16 +14,6 @@ Example: The web client stores all user authentication related data, which is th
 
 ## Quickstart
 
-
-Make sure, that Python 3 is installed. Install all requirements with the following command:
-On macOS, please run:
-
-```
-export CFLAGS="-I$(brew --prefix openssl)/include $CFLAGS"
-export LDFLAGS="-L$(brew --prefix openssl)/lib $LDFLAGS"
-```
-(This is necessary to build the `psycopg2` library.)
-
 ```
 $ python3 -m pip install -r verification/requirements.txt
 ```
@@ -33,16 +23,6 @@ Run the server in development mode.
 $ cd verification
 $ python3 manage.py migrate
 $ python3 manage.py runserver 127.0.0.1:8001
-```
-
-Run the containerized server in production mode with docker-compose.
-```
-$ docker-compose down -v
-$ docker-compose -f docker-compose.yml up -d --build
-```
-View the logs with
-```
-$ docker-compose logs -f
 ```
 
 ## API Endpoints
