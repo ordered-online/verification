@@ -14,9 +14,4 @@ fi
 python manage.py flush --no-input
 python manage.py migrate
 
-if [ "$LOAD_DATA" = 1 ]
-then
-    python manage.py load_data
-fi
-
 exec "$@"
