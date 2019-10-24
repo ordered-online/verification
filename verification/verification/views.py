@@ -1,5 +1,6 @@
 import json
 import re
+from json import JSONDecodeError
 
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
@@ -52,12 +53,20 @@ class DuplicateUser(AbstractFailureResponse):
     reason = "duplicate_user"
 
 
+class MalformedJson(AbstractFailureResponse):
+    reason = "malformed_json"
+
+
 def login(request):
     """Simple credientials based authentication via POST."""
     if request.method != "POST":
         return IncorrectAccessMethod()
 
-    data = json.loads(request.body)
+    try:
+        data = json.loads(request.body)
+    except JSONDecodeError:
+        return MalformedJson()
+
     user = authenticate(
         username=data.get("username"),
         password=data.get("password")
@@ -88,7 +97,11 @@ def logout(request):
     if request.method != "POST":
         return IncorrectAccessMethod()
 
-    data = json.loads(request.body)
+    try:
+        data = json.loads(request.body)
+    except JSONDecodeError:
+        return MalformedJson()
+
     session_key = data.get("session_key")
     user_id = data.get("user_id")
 
@@ -116,7 +129,11 @@ def verify(request):
     if request.method != "POST":
         return IncorrectAccessMethod()
 
-    data = json.loads(request.body)
+    try:
+        data = json.loads(request.body)
+    except JSONDecodeError:
+        return MalformedJson()
+
     session_key = data.get("session_key")
     user_id = data.get("user_id")
 
@@ -140,9 +157,13 @@ def verify(request):
 def register(request):
     """Simple user registration via POST."""
     if request.method != "POST":
-        return JsonResponse({"success": False})
+        return IncorrectAccessMethod()
 
-    data = json.loads(request.body)
+    try:
+        data = json.loads(request.body)
+    except JSONDecodeError:
+        return MalformedJson()
+
     username = data.get("username")
     password = data.get("password")
     email = data.get("email")
