@@ -152,6 +152,8 @@ Following failure responses are supported:
 
 ### MalformedJson
 
+Code: 400
+
 ```
 {
     "success":false,
@@ -160,6 +162,8 @@ Following failure responses are supported:
 ```
 
 ### IncorrectCredentials
+
+Code: 403
 
 ```
 { 
@@ -170,6 +174,8 @@ Following failure responses are supported:
 
 ### IncorrectAccessMethod
 
+Code: 405
+
 ```
 { 
    "success":false,
@@ -178,6 +184,8 @@ Following failure responses are supported:
 ```
 
 ### IncorrectSessionKey
+
+Code: 403
 
 ```
 { 
@@ -188,6 +196,8 @@ Following failure responses are supported:
 
 ### IncorrectUserId
 
+Code: 403
+
 ```
 { 
    "success":false,
@@ -196,6 +206,8 @@ Following failure responses are supported:
 ```
 
 ### DuplicateUser
+
+Code: 400
 
 ```
 { 

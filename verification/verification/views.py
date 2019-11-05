@@ -11,6 +11,8 @@ from .sessions import UserSessionStore, UserSession
 
 
 class SuccessResponse(JsonResponse):
+    status_code = 200
+
     def __init__(self, response=None):
         if response is None:
             super().__init__({
@@ -35,26 +37,32 @@ class AbstractFailureResponse(JsonResponse):
 
 class IncorrectCredentials(AbstractFailureResponse):
     reason = "incorrect_credentials"
+    status_code = 403
 
 
 class IncorrectAccessMethod(AbstractFailureResponse):
     reason = "incorrect_access_method"
+    status_code = 405
 
 
 class IncorrectSessionKey(AbstractFailureResponse):
     reason = "incorrect_session_key"
+    status_code = 403
 
 
 class IncorrectUserId(AbstractFailureResponse):
     reason = "incorrect_user_id"
+    status_code = 403
 
 
 class DuplicateUser(AbstractFailureResponse):
     reason = "duplicate_user"
+    status_code = 400
 
 
 class MalformedJson(AbstractFailureResponse):
     reason = "malformed_json"
+    status_code = 400
 
 
 def login(request):
