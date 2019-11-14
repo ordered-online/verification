@@ -83,12 +83,6 @@ def login(request):
     if user is None:
         return IncorrectCredentials()
 
-    # Delete the old session, if it exists
-    try:
-        UserSession.objects.get(user_id__exact=user.id).delete()
-    except UserSession.DoesNotExist:
-        pass
-
     # Create a new user session
     session_store = UserSessionStore()
     session_store["user_id"] = user.id
@@ -156,6 +150,9 @@ def verify(request):
     except UserSession.DoesNotExist:
         return IncorrectSessionKey()
 
+    if session.is_expired:
+        return IncorrectSessionKey()
+
     if session.user_id != user_id:
         return IncorrectUserId()
 
@@ -198,14 +195,6 @@ def register(request):
 
     if user is None:
         return IncorrectCredentials()
-
-    # Delete the old session, if it exists.
-    # This could happen, if a user was deleted beforehand
-    # but left his session behind
-    try:
-        UserSession.objects.get(user_id__exact=user.id).delete()
-    except UserSession.DoesNotExist:
-        pass
 
     session_store = UserSessionStore()
     session_store["user_id"] = user.id
