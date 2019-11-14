@@ -46,14 +46,14 @@ Example with `curl`:
 ```
 $ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser", "password": "testtest", "email": "test@example.com", "first_name": "Test", "last_name": "User"}' http://127.0.0.1:8001/verification/register/
 
-{ 
-   "success":true,
-   "response":{ 
-      "session_key":"lyp1u0ld51p42mnv1jcw8qqqe5iijt3p",
-      "session_data":{ 
-         "user_id":1
-      }
-   }
+{
+    "success": true,
+    "response": {
+        "session_key": "4zn5tlb1psfv7o8vurrtactbis76aw9m",
+        "session_data": {
+            "user_id": 1
+        }
+    }
 }
 ```
 
@@ -78,8 +78,14 @@ Example with `curl`:
 ```
 $ curl -i -X POST -H 'Content-Type: application/json' -d '{"session_key": "lyp1u0ld51p42mnv1jcw8qqqe5iijt3p", "user_id": 1}' http://127.0.0.1:8001/verification/verify/
 
-{ 
-   "success":true
+{
+    "success": true,
+    "response": {
+        "session_key": "4zn5tlb1psfv7o8vurrtactbis76aw9m",
+        "session_data": {
+            "user_id": 1
+        }
+    }
 }
 ```
 
@@ -103,14 +109,14 @@ Example with `curl`:
 ```
 $ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser", "password": "testtest"}' http://127.0.0.1:8001/verification/login/ 
 
-{ 
-   "success":true,
-   "response":{ 
-      "session_key":"se81hgvyhp6opiggjehxfisu6e2goqz3",
-      "session_data":{ 
-         "user_id":1
-      }
-   }
+{
+    "success": true,
+    "response": {
+        "session_key": "xnzafme15cgceeyhchdgahjdc72hzu9z",
+        "session_data": {
+            "user_id": 1
+        }
+    }
 }
 ```
 

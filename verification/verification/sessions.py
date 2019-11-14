@@ -8,7 +8,7 @@ from django.utils import timezone
 
 class UserSession(AbstractBaseSession):
     """Represent a user related session."""
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     @property
     def is_expired(self):

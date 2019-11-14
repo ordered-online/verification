@@ -25,6 +25,24 @@ class SuccessResponse(JsonResponse):
             })
 
 
+class AbstractSessionResponse(SuccessResponse):
+    def __init__(self, session_key, session_data):
+        super().__init__({
+            "session_key": session_key,
+            "session_data": session_data,
+        })
+
+
+class SessionStoreResponse(AbstractSessionResponse):
+    def __init__(self, session_store):
+        super().__init__(session_store.session_key, session_store.load())
+
+
+class SessionResponse(AbstractSessionResponse):
+    def __init__(self, session):
+        super().__init__(session.session_key, session.get_decoded())
+
+
 class AbstractFailureResponse(JsonResponse):
     reason = None
 
@@ -88,10 +106,7 @@ def login(request):
     session_store["user_id"] = user.id
     session_store.create()
 
-    return SuccessResponse({
-        "session_key": session_store.session_key,
-        "session_data": session_store.load(),
-    })
+    return SessionStoreResponse(session_store)
 
 
 def logout(request):
@@ -156,7 +171,7 @@ def verify(request):
     if session.user_id != user_id:
         return IncorrectUserId()
 
-    return SuccessResponse()
+    return SessionResponse(session)
 
 
 def register(request):
@@ -200,7 +215,4 @@ def register(request):
     session_store["user_id"] = user.id
     session_store.create()
 
-    return SuccessResponse({
-        "session_key": session_store.session_key,
-        "session_data": session_store.load(),
-    })
+    return SessionStoreResponse(session_store)
