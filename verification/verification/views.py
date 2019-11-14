@@ -15,22 +15,23 @@ class SuccessResponse(JsonResponse):
 
     def __init__(self, response=None):
         if response is None:
-            super().__init__({
-                "success": True,
-            })
+            super().__init__({})
         else:
-            super().__init__({
-                "success": True,
-                "response": response
-            })
+            super().__init__(response)
 
+class LogoutResponse(SuccessResponse):
+    message = "You have been successfully logged out."
+
+    def __init__(self):
+        super().__init__({
+            "message" : self.message
+        })
 
 class AbstractFailureResponse(JsonResponse):
     reason = None
 
     def __init__(self):
         super().__init__({
-            "success": False,
             "reason": self.reason
         })
 
@@ -129,7 +130,7 @@ def logout(request):
 
     session.delete()
 
-    return SuccessResponse()
+    return LogoutResponse()
 
 
 def verify(request):
@@ -159,8 +160,10 @@ def verify(request):
     if session.user_id != user_id:
         return IncorrectUserId()
 
-    return SuccessResponse()
-
+    return SuccessResponse({
+        "session_key": str(session),
+        "session_data": session.get_decoded(),
+    })
 
 def register(request):
     """Simple user registration via POST."""
