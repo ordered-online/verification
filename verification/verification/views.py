@@ -15,15 +15,17 @@ class SuccessResponse(JsonResponse):
 
     def __init__(self, response=None):
         if response is None:
-            super().__init__({
-                "success": True,
-            })
+            super().__init__({})
         else:
-            super().__init__({
-                "success": True,
-                "response": response
-            })
+            super().__init__(response)
 
+class LogoutResponse(SuccessResponse):
+    message = "logged_out"
+
+    def __init__(self):
+        super().__init__({
+            "message" : self.message
+        })
 
 class AbstractSessionResponse(SuccessResponse):
     def __init__(self, session_key, session_data):
@@ -31,7 +33,6 @@ class AbstractSessionResponse(SuccessResponse):
             "session_key": session_key,
             "session_data": session_data,
         })
-
 
 class SessionStoreResponse(AbstractSessionResponse):
     def __init__(self, session_store):
@@ -48,7 +49,6 @@ class AbstractFailureResponse(JsonResponse):
 
     def __init__(self):
         super().__init__({
-            "success": False,
             "reason": self.reason
         })
 
@@ -138,7 +138,7 @@ def logout(request):
 
     session.delete()
 
-    return SuccessResponse()
+    return LogoutResponse()
 
 
 def verify(request):
