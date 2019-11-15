@@ -22,7 +22,7 @@ Run the server in development mode.
 ```
 $ cd verification
 $ python3 manage.py migrate
-$ python3 manage.py runserver 127.0.0.1:8001
+$ python3 manage.py runserver 127.0.0.1:8000
 ```
 
 ## API Endpoints
@@ -45,7 +45,7 @@ Method: POST
 Example with `curl`:
 
 ```
-$ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser", "password": "testtest", "email": "test@example.com", "first_name": "Test", "last_name": "User"}' http://127.0.0.1:8001/verification/register
+$ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser", "password": "testtest", "email": "test@example.com", "first_name": "Test", "last_name": "User"}' http://127.0.0.1:8000/verification/register
 
 {
    "session_key":"lyp1u0ld51p42mnv1jcw8qqqe5iijt3p",
@@ -77,7 +77,7 @@ Note that `user_id` is required to avoid brute force style attacks.
 Example with `curl`:
 
 ```
-$ curl -i -X POST -H 'Content-Type: application/json' -d '{"session_key": "lyp1u0ld51p42mnv1jcw8qqqe5iijt3p", "user_id": 1}' http://127.0.0.1:8001/verification/verify
+$ curl -i -X POST -H 'Content-Type: application/json' -d '{"session_key": "lyp1u0ld51p42mnv1jcw8qqqe5iijt3p", "user_id": 1}' http://127.0.0.1:8000/verification/verify
 
 {
    "session_key":"lyp1u0ld51p42mnv1jcw8qqqe5iijt3p",
@@ -108,7 +108,7 @@ Method: POST
 Example with `curl`:
 
 ```
-$ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser", "password": "testtest"}' http://127.0.0.1:8001/verification/login
+$ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser", "password": "testtest"}' http://127.0.0.1:8000/verification/login
 
 {
    "session_key":"se81hgvyhp6opiggjehxfisu6e2goqz3",
@@ -139,7 +139,7 @@ Note that `user_id` is required to avoid brute force style attacks.
 Example with `curl`:
 
 ```
-$ curl -i -X POST -H 'Content-Type: application/json' -d '{"session_key": "lyp1u0ld51p42mnv1jcw8qqqe5iijt3p", "user_id": 1}' http://127.0.0.1:8001/verification/logout
+$ curl -i -X POST -H 'Content-Type: application/json' -d '{"session_key": "lyp1u0ld51p42mnv1jcw8qqqe5iijt3p", "user_id": 1}' http://127.0.0.1:8000/verification/logout
 
 {
    "message": "You've Been Logged Out"

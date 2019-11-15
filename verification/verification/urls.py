@@ -21,8 +21,8 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path("verification/register", views.register, name="register"),
-    path("verification/verify", views.verify, name="verify"),
-    path("verification/login", views.login, name="login"),
-    path("verification/logout", views.logout, name="logout"),
+    path("verification/register/", views.register, name="register"),
+    path("verification/verify/", views.verify, name="verify"),
+    path("verification/login/", views.login, name="login"),
+    path("verification/logout/", views.logout, name="logout"),
 ]

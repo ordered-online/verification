@@ -20,7 +20,7 @@ class SuccessResponse(JsonResponse):
             super().__init__(response)
 
 class LogoutResponse(SuccessResponse):
-    message = "You have been successfully logged out."
+    message = "logged_out"
 
     def __init__(self):
         super().__init__({
