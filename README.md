@@ -29,7 +29,7 @@ $ python3 manage.py runserver 127.0.0.1:8000
 
 Following API Endpoints are supported:
 
-### Registration via `/verification/register`
+### Registration via `/verification/register/`
 
 Register a new user with credentials. Returns the generated auth token.
 Method: POST
@@ -45,7 +45,7 @@ Method: POST
 Example with `curl`:
 
 ```
-$ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser", "password": "testtest", "email": "test@example.com", "first_name": "Test", "last_name": "User"}' http://127.0.0.1:8000/verification/register
+$ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser", "password": "testtest", "email": "test@example.com", "first_name": "Test", "last_name": "User"}' http://127.0.0.1:8000/verification/register/
 
 {
    "session_key":"lyp1u0ld51p42mnv1jcw8qqqe5iijt3p",
@@ -62,7 +62,7 @@ Failure responses:
 - [IncorrectCredentials](#IncorrectCredentials) if the supplied credentials are insufficient for account creation.
 - [DuplicateUser](#DuplicateUser) if the user already exists.
 
-### Session key verification via`/verification/verify`
+### Session key verification via`/verification/verify/`
 
 Verify a user with a session key. Returns the associated user and a session data.
 Method: POST
@@ -77,7 +77,7 @@ Note that `user_id` is required to avoid brute force style attacks.
 Example with `curl`:
 
 ```
-$ curl -i -X POST -H 'Content-Type: application/json' -d '{"session_key": "lyp1u0ld51p42mnv1jcw8qqqe5iijt3p", "user_id": 1}' http://127.0.0.1:8000/verification/verify
+$ curl -i -X POST -H 'Content-Type: application/json' -d '{"session_key": "lyp1u0ld51p42mnv1jcw8qqqe5iijt3p", "user_id": 1}' http://127.0.0.1:8000/verification/verify/
 
 {
    "session_key":"lyp1u0ld51p42mnv1jcw8qqqe5iijt3p",
@@ -94,7 +94,7 @@ Failure responses:
 - [IncorrectSessionKey](#IncorrectSessionKey) if the session key is incorrect or the accessed session no longer exists.
 - [IncorrectUserId](#IncorrectUserId) if the given user id is incorrect.
 
-### Login via `/verification/login`
+### Login via `/verification/login/`
 
 Verify an user with login credentials. Returns an authentication token.
 Note, that every time credentials are requested, all existing sessions from the user get invalidated.
@@ -108,7 +108,7 @@ Method: POST
 Example with `curl`:
 
 ```
-$ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser", "password": "testtest"}' http://127.0.0.1:8000/verification/login
+$ curl -i -X POST -H 'Content-Type: application/json' -d '{"username": "testuser", "password": "testtest"}' http://127.0.0.1:8000/verification/login/
 
 {
    "session_key":"se81hgvyhp6opiggjehxfisu6e2goqz3",
@@ -124,7 +124,7 @@ Failure Responses:
 - [IncorrectAccessMethod](#IncorrectAccessMethod) if the service was accessed with any other method than specified.
 - [IncorrectCredentials](#IncorrectCredentials) if the credentials are incorrect.
 
-### Logout via `/verification/logout`
+### Logout via `/verification/logout/`
 
 Invalidate the session under the given session key and logout.
 Method: POST
@@ -139,10 +139,10 @@ Note that `user_id` is required to avoid brute force style attacks.
 Example with `curl`:
 
 ```
-$ curl -i -X POST -H 'Content-Type: application/json' -d '{"session_key": "lyp1u0ld51p42mnv1jcw8qqqe5iijt3p", "user_id": 1}' http://127.0.0.1:8000/verification/logout
+$ curl -i -X POST -H 'Content-Type: application/json' -d '{"session_key": "lyp1u0ld51p42mnv1jcw8qqqe5iijt3p", "user_id": 1}' http://127.0.0.1:8000/verification/logout/
 
 {
-   "message": "You've Been Logged Out"
+   "message": "logged_out"
 }
 ```
 
