@@ -24,3 +24,7 @@ $ cd verification
 $ python3 manage.py migrate
 $ python3 manage.py runserver 127.0.0.1:8000
 ```
+
+## Admin panel
+
+The admin panel is accessible to a superuser via `/verification/admin/`
